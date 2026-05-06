@@ -566,9 +566,9 @@ export default function RegisterPage() {
                       <label className="reg-label">प्लॉट का आकार *</label>
                       <select className="reg-select" name="size" required value={form.size} onChange={handleChange}>
                         <option value="">आकार चुनें</option>
-                        <option value="121 to 152 Sq. Yards">121 से 152 वर्ग गज</option>
-                        <option value="152 to 201 Sq. Yards">152 से 201 वर्ग गज</option>
-                        <option value="201+ Sq. Yards">201+ वर्ग गज</option>
+                        <option value="120 to 172 Sq. Yards">120 से 172 वर्ग गज</option>
+                        <option value="172 to 222 Sq. Yards">172 से 222 वर्ग गज</option>
+                        <option value="222+ Sq. Yards">222+ वर्ग गज</option>
                       </select>
                     </div>
                   </div>
