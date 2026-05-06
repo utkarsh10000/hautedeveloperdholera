@@ -1,264 +1,348 @@
 "use client";
+
 export default function ProjectSnapshot() {
   const stats = [
     {
-      icon: (
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
-        </svg>
-      ),
-      label: 'परियोजना प्रकार',
-      value: 'आवासीय प्लॉटेड विकास',
-      sub: 'धोलेरा एसआईआर, गुजरात',
-      accent: '#ea6c1a',
+      label: "परियोजना प्रकार",
+      value: "आवासीय प्लॉटेड विकास",
+      sub: "धोलेरा एसआईआर, गुजरात",
+      code: "P-01",
     },
     {
-      icon: (
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-        </svg>
-      ),
-      label: 'प्लॉट आकार',
-      value: '121 वर्ग गज और उससे अधिक',
-      sub: 'अनेक विन्यास उपलब्ध',
-      accent: '#ea6c1a',
+      label: "प्लॉट आकार",
+      value: "121 वर्ग गज और उससे अधिक",
+      sub: "अनेक विन्यास उपलब्ध",
+      code: "P-02",
     },
     {
-      icon: (
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
-        </svg>
-      ),
-      label: 'स्वामित्व',
-      value: 'फ्रीहोल्ड',
-      sub: 'पूर्ण कानूनी स्वामित्व हस्तांतरण',
-      accent: '#ea6c1a',
+      label: "स्वामित्व",
+      value: "फ्रीहोल्ड",
+      sub: "पूर्ण कानूनी स्वामित्व हस्तांतरण",
+      code: "P-03",
     },
     {
-      icon: (
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
-        </svg>
-      ),
-      label: 'पंजीकरण',
-      value: 'लागू प्रक्रिया अनुसार',
-      sub: 'सरकारी दस्तावेज़ीकरण',
-      accent: '#ea6c1a',
+      label: "पंजीकरण",
+      value: "लागू प्रक्रिया अनुसार",
+      sub: "सरकारी दस्तावेज़ीकरण",
+      code: "P-04",
     },
     {
-      icon: (
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
-        </svg>
-      ),
-      label: 'योजना मूल्य',
-      value: '₹7,500 / वर्ग गज',
-      sub: 'आवेदन शुल्क ₹11,500 वापसी योग्य',
-      accent: '#ea6c1a',
+      label: "योजना मूल्य",
+      value: "₹7,500 / वर्ग गज",
+      sub: "आवेदन शुल्क ₹11,500 वापसी योग्य",
+      code: "P-05",
     },
     {
-      icon: (
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
-        </svg>
-      ),
-      label: 'महिला कोटा',
-      value: '33% आरक्षित',
-      sub: 'महिलाएं और सरकारी कर्मचारी',
-      accent: '#ea6c1a',
+      label: "महिला कोटा",
+      value: "33% आरक्षित",
+      sub: "महिलाएं और सरकारी कर्मचारी",
+      code: "P-06",
     },
   ];
 
+  const logos = [
+    { src: "/Gov-logo.png",                          alt: "Government of Gujarat" },
+    { src: "/Smart-City-1.webp",                     alt: "Smart City Mission" },
+    { src: "/amrut.webp",                            alt: "AMRUT" },
+    { src: "/Gujarat-Urban-Development-Mission.webp", alt: "Gujarat Urban Development" },
+  ];
+
   return (
-    <section id="project" style={{
-      background: '#1a3a6b',
-      padding: '4rem 0 7rem',
-      position: 'relative',
-      overflow: 'hidden',
-    }}>
-
+    <section id="project" style={{ fontFamily: '"Times New Roman", Times, serif', background: "#f0f0f0" }}>
       <style>{`
-        @keyframes fadeSlideUp {
-          from { opacity: 0; transform: translateY(24px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .snap-card {
-          animation: fadeSlideUp 0.5s ease both;
-          transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s ease, box-shadow 0.3s ease;
-        }
-        .snap-card:hover {
-          transform: scale(1.05);
-          background: rgba(255,255,255,0.10) !important;
-          box-shadow: 0 24px 48px rgba(0,0,0,0.4), 0 0 0 2px #ea6c1a, 0 0 20px 4px rgba(201,144,26,0.4) !important;
-          z-index: 10;
-        }
-        .snap-card:nth-child(1) { animation-delay: 0.05s; }
-        .snap-card:nth-child(2) { animation-delay: 0.10s; }
-        .snap-card:nth-child(3) { animation-delay: 0.15s; }
-        .snap-card:nth-child(4) { animation-delay: 0.20s; }
-        .snap-card:nth-child(5) { animation-delay: 0.25s; }
-        .snap-card:nth-child(6) { animation-delay: 0.30s; }
+        .ps-tricolor { display: flex; height: 8px; width: 100%; }
+        .ps-tricolor span:nth-child(1) { flex: 1; background: #FF9933; }
+        .ps-tricolor span:nth-child(2) { flex: 1; background: #ffffff; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; }
+        .ps-tricolor span:nth-child(3) { flex: 1; background: #138808; }
 
-        /* Govt logos */
-        .proj-logos-wrap {
+        .ps-marquee-wrap {
+          background: #00308F; color: #FFD700;
+          padding: 5px 0; overflow: hidden;
+          border-top: 2px solid #FFD700; border-bottom: 2px solid #FFD700;
+          font-size: 13px; font-weight: bold;
+          letter-spacing: 0.04em; white-space: nowrap;
+        }
+        .ps-marquee-inner {
+          display: inline-block;
+          animation: ps-scroll 28s linear infinite;
+          padding-left: 100%;
+        }
+        @keyframes ps-scroll {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-100%); }
+        }
+
+        .ps-section-head {
+          background: #00308F; color: #fff;
+          padding: 8px 16px; font-size: 14px;
+          font-weight: bold; border-left: 6px solid #FF9933;
+          letter-spacing: 0.03em; text-transform: uppercase;
+        }
+
+        .ps-notice {
+          background: #fffde7; border: 1px solid #f9a825;
+          border-left: 5px solid #f57f17;
+          padding: 9px 14px; font-size: 13px;
+          color: #333; margin-bottom: 12px;
+        }
+
+        .ps-logos-strip {
+          background: #00308F;
+          border: 1px solid #003580;
+          border-top: none;
+          padding: 12px 16px;
           display: flex;
           align-items: center;
-          gap: 1rem;
-          margin-bottom: 4rem;
+          gap: 12px;
           flex-wrap: wrap;
           justify-content: center;
         }
-        .proj-logo-box {
-          background: rgba(255,255,255,0.08);
-          border: 1px solid rgba(255,255,255,0.12);
-          border-radius: 10px;
-          padding: 0.8rem 1.2rem;
+        .ps-logo-box {
+          background: rgba(255,255,255,0.12);
+          border: 1px solid rgba(255,255,255,0.2);
+          padding: 6px 10px;
           display: flex;
           align-items: center;
           justify-content: center;
         }
-        .proj-logo-box img {
-          height: 125px;
+        .ps-logo-box img {
+          height: 50px;
           width: auto;
           object-fit: contain;
         }
+        .ps-logos-label {
+          font-size: 10px; font-weight: bold;
+          color: #FFD700; letter-spacing: 0.12em;
+          text-transform: uppercase; width: 100%;
+          text-align: center; margin-bottom: 6px;
+        }
 
-        /* Grid */
-        .snapshot-grid {
+        .ps-card-grid {
           display: grid;
-          grid-template-columns: repeat(6, 1fr);
-          gap: 16px;
-          border-radius: 20px;
-          overflow: visible;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 0;
+          border: 1px solid #aab;
+          border-top: none;
+          overflow: hidden;
+        }
+        .ps-card {
+          background: #fff;
+          border-right: 1px solid #bbb;
+          border-bottom: 1px solid #bbb;
+          padding: 14px 12px;
+          transition: background 0.15s;
+        }
+        .ps-card:hover { background: #e8eef8; }
+        .ps-card-code {
+          font-size: 9px; color: #FF9933; font-weight: bold;
+          letter-spacing: 0.08em; font-family: "Courier New", monospace;
+          margin-bottom: 4px;
+        }
+        .ps-card-label {
+          font-size: 10px; font-weight: bold; color: #00308F;
+          text-transform: uppercase; letter-spacing: 0.06em;
+          margin-bottom: 4px;
+        }
+        .ps-card-value {
+          font-size: 14px; font-weight: bold; color: #111;
+          line-height: 1.3; margin-bottom: 3px;
+        }
+        .ps-card-sub {
+          font-size: 11px; color: #666; line-height: 1.5;
         }
 
-        /* Responsive */
-        @media (max-width: 1024px) {
-          .snapshot-grid { grid-template-columns: repeat(3, 1fr) !important; }
+        .ps-table {
+          width: 100%; border-collapse: collapse; font-size: 13px; background: #fff;
         }
-        @media (max-width: 640px) {
-          .snapshot-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
-          .proj-logo-box img { height: 70px !important; }
-          .proj-logos-wrap { gap: 0.6rem !important; }
-          .proj-logo-box { padding: 0.5rem 0.7rem !important; }
+        .ps-table th {
+          background: #00308F; color: #FFD700;
+          padding: 7px 10px; text-align: left;
+          border: 1px solid #003580; font-size: 11px;
+          text-transform: uppercase; letter-spacing: 0.06em;
         }
-        @media (max-width: 400px) {
-          .snapshot-grid { grid-template-columns: 1fr !important; }
+        .ps-table td {
+          padding: 7px 10px; border: 1px solid #bbb;
+          vertical-align: top; color: #111; line-height: 1.5;
+        }
+        .ps-table tr:nth-child(even) td { background: #e8eef8; }
+        .ps-table tr:hover td { background: #d0daf0; }
+
+        .ps-stats-row { display: flex; gap: 0; border: 1px solid #aab; overflow: hidden; }
+        .ps-stat-cell {
+          flex: 1; text-align: center; padding: 10px 6px;
+          border-right: 1px solid #aab; background: #fff;
+        }
+        .ps-stat-cell:last-child { border-right: none; }
+        .ps-stat-cell:nth-child(even) { background: #e8eef8; }
+
+        .ps-gov-btn {
+          display: inline-block; background: #138808; color: #fff;
+          border: 2px outset #1aaa0a; padding: 7px 20px;
+          font-size: 13px; font-weight: bold; text-decoration: none;
+          cursor: pointer; font-family: "Times New Roman", serif;
+          letter-spacing: 0.03em; transition: background 0.15s;
+        }
+        .ps-gov-btn:hover { background: #0d6e06; border-style: inset; }
+
+        .ps-footer-strip {
+          background: #00308F; color: #fff; font-size: 12px;
+          padding: 10px 16px; display: flex;
+          justify-content: space-between; align-items: center;
+          border-top: 3px solid #FF9933; flex-wrap: wrap; gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+          .ps-card-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 480px) {
+          .ps-card-grid { grid-template-columns: 1fr !important; }
+          .ps-logo-box img { height: 36px !important; }
         }
       `}</style>
 
-      {/* Faint background watermark */}
-      <div style={{
-        position: 'absolute', bottom: '-2rem', right: '-2rem',
-        fontFamily: "'Cormorant Garamond', Georgia, serif",
-        fontSize: 'clamp(6rem, 14vw, 14rem)',
-        fontWeight: 700, color: 'rgba(255,255,255,0.03)',
-        lineHeight: 1, pointerEvents: 'none', userSelect: 'none',
-        letterSpacing: '-0.03em',
-      }}>प्लॉट्स</div>
+      {/* Tricolor top */}
+      <div className="ps-tricolor"><span /><span /><span /></div>
 
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 2rem', position: 'relative', zIndex: 1 }}>
+      {/* Marquee */}
+      <div className="ps-marquee-wrap">
+        <div className="ps-marquee-inner">
+          ★ परियोजना स्नैपशॉट ★ धोलेरा SIR ★ आवासीय प्लॉटेड विकास ★ फ्रीहोल्ड संपत्ति ★ गुजरात सरकार अनुमोदित ★ DMIC परियोजना ★ ₹7,500/वर्ग गज ★ अभी पंजीकरण करें ★&nbsp;&nbsp;&nbsp;★ परियोजना स्नैपशॉट ★ धोलेरा SIR ★ आवासीय प्लॉटेड विकास ★ फ्रीहोल्ड संपत्ति ★ गुजरात सरकार अनुमोदित ★ DMIC परियोजना ★ ₹7,500/वर्ग गज ★ अभी पंजीकरण करें ★
+        </div>
+      </div>
 
-        {/* Proudly Supported By */}
-        <div style={{
-          fontFamily: "'Poppins', system-ui, sans-serif",
-          fontSize: '1rem', fontWeight: 600,
-          letterSpacing: '0.18em', textTransform: 'uppercase',
-          color: '#ffffff',
-          marginBottom: '1.5rem',
-          textAlign: 'center',
-        }}>गर्व से समर्थित</div>
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "20px 16px 0" }}>
 
-        {/* Govt. Authority Logos */}
-        <div className="proj-logos-wrap">
-          {[
-            { src: '/Gov-logo.png', alt: 'Government of Gujarat' },
-            { src: '/Smart-City-1.webp', alt: 'Smart City Mission' },
-            { src: '/amrut.webp', alt: 'AMRUT' },
-            { src: '/Gujarat-Urban-Development-Mission.webp', alt: 'Gujarat Urban Development' },
-          ].map(logo => (
-            <div key={logo.alt} className="proj-logo-box">
+        {/* Notice */}
+        <div className="ps-notice">
+          <strong>⚠ सूचना:</strong> धोलेरा आवास योजना एक सरकार समर्थित ग्रीनफील्ड स्मार्ट सिटी परियोजना है। प्रबंधन कोटा में केवल <strong>235 प्लॉट शेष</strong> हैं। आवेदन शुल्क <strong>₹11,500</strong> (पूर्णतः वापसी योग्य)।
+        </div>
+
+        {/* Section heading */}
+        <div className="ps-section-head">
+          अनुभाग: परियोजना स्नैपशॉट — Project Snapshot
+        </div>
+
+        {/* Govt logos strip */}
+        <div className="ps-logos-strip">
+          <div className="ps-logos-label">★ गर्व से समर्थित — Proudly Supported By ★</div>
+          {logos.map(logo => (
+            <div key={logo.alt} className="ps-logo-box">
               <img src={logo.src} alt={logo.alt} />
             </div>
           ))}
         </div>
 
-        {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2 style={{
-            fontFamily: "'Cormorant Garamond', Georgia, serif",
-            fontSize: 'clamp(2.2rem, 4vw, 3.5rem)',
-            fontWeight: 600, color: '#ffffff',
-            lineHeight: 1.05, margin: '0 0 1.2rem',
-            display: 'inline-flex', alignItems: 'baseline', gap: '0.4rem', flexWrap: 'wrap',
-            justifyContent: 'center',
-          }}>
-            परियोजना&nbsp;<span style={{ fontStyle: 'italic', color: '#ea6c1a' }}>स्नैपशॉट</span>
-          </h2>
-          <div style={{
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem',
-          }}>
-            <div style={{ flex: 1, maxWidth: 80, height: 1, background: 'linear-gradient(90deg, transparent, rgba(201,144,26,0.5))' }} />
-            <div style={{ width: 6, height: 6, background: '#ea6c1a', transform: 'rotate(45deg)', flexShrink: 0 }} />
-            <div style={{ width: 48, height: 2.5, background: 'linear-gradient(90deg, #ea6c1a, #f5a54a)', borderRadius: 2 }} />
-            <div style={{ width: 6, height: 6, background: '#ea6c1a', transform: 'rotate(45deg)', flexShrink: 0 }} />
-            <div style={{ flex: 1, maxWidth: 80, height: 1, background: 'linear-gradient(90deg, rgba(201,144,26,0.5), transparent)' }} />
-          </div>
+        {/* Grid heading bar */}
+        <div style={{
+          background: "#e8eef8", padding: "6px 12px",
+          fontSize: 11, fontWeight: "bold", color: "#00308F",
+          textTransform: "uppercase", letterSpacing: "0.06em",
+          border: "1px solid #aab", borderTop: "2px solid #00308F",
+          borderBottom: "none",
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+        }}>
+          <span>► परियोजना विवरण — Project Details</span>
+          <span style={{ color: "#888", fontWeight: "normal" }}>कुल: {stats.length} विवरण</span>
         </div>
 
-        {/* Grid */}
-        <div className="snapshot-grid">
-          {stats.map((stat, i) => (
-            <div
-              key={stat.label}
-              className="snap-card"
-              style={{
-                background: 'rgba(255,255,255,0.04)',
-                padding: '2.2rem 1.6rem',
-                display: 'flex', flexDirection: 'column',
-                gap: '0.9rem',
-                cursor: 'default',
-                position: 'relative',
-                borderRadius: 16,
-                border: '1px solid rgba(201,144,26,0.45)',
-              }}
-            >
-              {/* Icon */}
-              <div style={{
-                width: 50, height: 50, borderRadius: 13,
-                background: 'rgba(201,144,26,0.15)',
-                border: '1px solid rgba(201,144,26,0.30)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: '#ea6c1a', flexShrink: 0,
-              }}>
-                {stat.icon}
-              </div>
-
-              {/* Label */}
-              <div style={{
-                fontFamily: "'Poppins', system-ui, sans-serif",
-                fontSize: '0.65rem', fontWeight: 700,
-                letterSpacing: '0.14em', textTransform: 'uppercase',
-                color: 'rgba(255,255,255,0.35)',
-              }}>{stat.label}</div>
-
-              {/* Value */}
-              <div style={{
-                fontFamily: "'Poppins', system-ui, sans-serif",
-                fontSize: '1.05rem', fontWeight: 600,
-                color: '#ffffff', lineHeight: 1.25,
-              }}>{stat.value}</div>
-
-              {/* Sub */}
-              <div style={{
-                fontFamily: "'Poppins', system-ui, sans-serif",
-                fontSize: '0.72rem', color: 'rgba(255,255,255,0.40)',
-                lineHeight: 1.5,
-              }}>{stat.sub}</div>
+        {/* Cards grid */}
+        <div className="ps-card-grid">
+          {stats.map((stat) => (
+            <div className="ps-card" key={stat.label}>
+              <div className="ps-card-code">{stat.code}</div>
+              <div className="ps-card-label">{stat.label}</div>
+              <div className="ps-card-value">{stat.value}</div>
+              <div className="ps-card-sub">{stat.sub}</div>
             </div>
           ))}
         </div>
+
+        {/* Summary table */}
+        <div style={{
+          background: "#e8eef8", padding: "6px 12px",
+          fontSize: 11, fontWeight: "bold", color: "#00308F",
+          textTransform: "uppercase", letterSpacing: "0.06em",
+          border: "1px solid #aab", borderTop: "2px solid #00308F",
+          borderBottom: "none", marginTop: 16,
+        }}>
+          ► परियोजना पहचान — Project Identification
+        </div>
+        <table className="ps-table">
+          <tbody>
+            {[
+              ["परियोजना का नाम", "धोलेरा आवास योजना"],
+              ["राज्य", "गुजरात"],
+              ["जिला", "अहमदाबाद / भावनगर"],
+              ["श्रेणी", "ग्रीनफील्ड स्मार्ट सिटी"],
+              ["स्वीकृति", "केंद्र सरकार / DMIC"],
+              ["अहमदाबाद से दूरी", "109 किमी (एक्सप्रेसवे)"],
+              ["हवाई अड्डा", "प्रस्तावित अंतर्राष्ट्रीय हवाई अड्डा"],
+              ["NA स्थिति", "✔ गैर-कृषि अनुमोदित"],
+            ].map(([k, v]) => (
+              <tr key={k}>
+                <td style={{ fontWeight: "bold", background: "#eef1f8", width: "40%" }}>{k}</td>
+                <td>{v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {/* Stats strip */}
+        <div className="ps-stats-row" style={{ borderTop: "2px solid #00308F" }}>
+          {[
+            { val: "121+", label: "न्यूनतम वर्ग गज" },
+            { val: "33%", label: "महिला कोटा" },
+            { val: "235", label: "शेष प्लॉट" },
+            { val: "₹7,500", label: "BSP दर" },
+            { val: "₹11,500", label: "आवेदन शुल्क" },
+          ].map(s => (
+            <div className="ps-stat-cell" key={s.label}>
+              <div style={{ fontSize: 18, fontWeight: "bold", color: "#b71c1c", lineHeight: 1 }}>{s.val}</div>
+              <div style={{ fontSize: 10, color: "#555", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 2 }}>{s.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA strip */}
+        <div style={{ border: "2px solid #b71c1c", background: "#fff", marginTop: 16 }}>
+          <div style={{
+            background: "#b71c1c", color: "#fff", padding: "6px 14px",
+            fontSize: 13, fontWeight: "bold", textTransform: "uppercase",
+            letterSpacing: "0.06em", display: "flex", alignItems: "center", gap: 8,
+          }}>
+            <span style={{ fontSize: 16 }}>⚠</span>
+            अंतिम अवसर सूचना — Limited Period Offer
+          </div>
+          <div style={{
+            display: "flex", alignItems: "center", justifyContent: "space-between",
+            padding: "14px 18px", flexWrap: "wrap", gap: 12,
+          }}>
+            <div>
+              <p style={{ fontSize: 14, color: "#111", margin: "0 0 4px", fontWeight: "bold" }}>
+                प्रबंधन कोटा में केवल <span style={{ color: "#b71c1c", fontSize: 18 }}>235</span> प्लॉट शेष हैं।
+              </p>
+              <p style={{ fontSize: 12, color: "#555", margin: 0 }}>
+                आवेदन शुल्क: <strong style={{ color: "#00308F" }}>₹11,500</strong>&nbsp;
+                <span style={{ color: "#138808" }}>★ पूर्णतः वापसी योग्य</span>
+              </p>
+            </div>
+            <a href="/register" className="ps-gov-btn">▶ अभी पंजीकरण करें</a>
+          </div>
+        </div>
+
       </div>
+
+      {/* Footer strip */}
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 16px" }}>
+        <div className="ps-footer-strip">
+          <span>© धोलेरा SIR निवेश पोर्टल | परियोजना स्नैपशॉट</span>
+          <span style={{ fontSize: 11, color: "#aac" }}>अंतिम अद्यतन: मार्च 2026 | DMIC अनुमोदित</span>
+        </div>
+      </div>
+
+      {/* Tricolor bottom */}
+      <div className="ps-tricolor"><span /><span /><span /></div>
+
     </section>
   );
 }

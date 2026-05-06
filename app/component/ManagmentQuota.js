@@ -14,7 +14,7 @@ export default function ManagementQuota() {
     return () => observer.disconnect();
   }, []);
 
-  const savings = 10900 - 10600;
+  const savings = 7500 - 7200;
 
   const stats = [
     {
@@ -24,447 +24,385 @@ export default function ManagementQuota() {
       progress: null,
       progressLabel: null,
       progressColor: null,
-      color: '#1a4a3a',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
-        </svg>
-      ),
+      tag: 'कुल',
+      tagBg: '#e8f0fb', tagText: '#00308F', tagBorder: '#aac4e8',
     },
     {
       num: '411',
       label: 'आवंटित प्लॉट',
-      desc: '646 में से 411 प्लॉट पहले ही आवंटित हो चुके हैं। मांग तेजी से बढ़ रही है। देर होने से पहले अभी कदम उठाएं।',
+      desc: '646 में से 411 प्लॉट पहले ही आवंटित हो चुके हैं। मांग तेजी से बढ़ रही है।',
       progress: 64,
       progressLabel: '64% आवंटित',
-      progressColor: '#ef4444',
-      color: '#b91c1c',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
-        </svg>
-      ),
+      progressColor: '#b71c1c',
+      tag: 'आवंटित',
+      tagBg: '#fce4ec', tagText: '#880e4f', tagBorder: '#f48fb1',
     },
     {
       num: '235',
       label: 'उपलब्ध इन्वेंटरी',
-      desc: 'केवल 235 प्लॉट अभी भी पंजीकरण के लिए खुले हैं। सीमित अवसर — बंद होने से पहले पंजीकरण करें।',
+      desc: 'केवल 235 प्लॉट अभी भी पंजीकरण के लिए खुले हैं। सीमित अवसर।',
       progress: 36,
       progressLabel: '36% शेष',
-      progressColor: '#16a34a',
-      color: '#15803d',
-      icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-        </svg>
-      ),
+      progressColor: '#138808',
+      tag: 'शेष',
+      tagBg: '#e8f5e9', tagText: '#1b5e20', tagBorder: '#a5d6a7',
     },
   ];
 
   return (
-    <section ref={ref} style={{
-      background: '#f8f5ef',
-      padding: '8rem 0',
-      position: 'relative',
-      overflow: 'hidden',
-    }}>
-
+    <section ref={ref} style={{ fontFamily: '"Times New Roman", Times, serif', background: '#f0f0f0' }}>
       <style>{`
-        @keyframes mq-fade-up {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .mq-card {
-          animation: mq-fade-up 0.5s ease both;
-        }
-        .mq-card:nth-child(1) { animation-delay: 0.1s; }
-        .mq-card:nth-child(2) { animation-delay: 0.2s; }
-        .mq-card:nth-child(3) { animation-delay: 0.3s; }
+        .mq-tricolor { display: flex; height: 8px; width: 100%; }
+        .mq-tricolor span:nth-child(1) { flex: 1; background: #FF9933; }
+        .mq-tricolor span:nth-child(2) { flex: 1; background: #ffffff; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; }
+        .mq-tricolor span:nth-child(3) { flex: 1; background: #138808; }
 
-        .mq-header-grid {
-          display: grid;
-          grid-template-columns: 1fr 1.4fr;
-          gap: 4rem;
-          align-items: end;
-          margin-bottom: 5rem;
+        .mq-marquee-wrap {
+          background: #00308F; color: #FFD700;
+          padding: 5px 0; overflow: hidden;
+          border-top: 2px solid #FFD700; border-bottom: 2px solid #FFD700;
+          font-size: 13px; font-weight: bold;
+          letter-spacing: 0.04em; white-space: nowrap;
         }
-        .mq-rate-grid {
-          display: grid;
-          grid-template-columns: 1fr 2fr;
-          gap: 2rem;
-          align-items: start;
+        .mq-marquee-inner {
+          display: inline-block;
+          animation: mq-scroll 28s linear infinite;
+          padding-left: 100%;
         }
-        .quota-stats-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 1rem;
-        }
-        .mq-card-inner {
-          display: grid;
-          grid-template-columns: auto 1fr auto;
-          gap: 1.4rem;
-          align-items: center;
-        }
-        .mq-cta-banner {
-          margin-top: 4rem;
-          background: linear-gradient(135deg, #1a3a6b 0%, #1a4a3a 100%);
-          border-radius: 20px;
-          padding: 2.8rem 3.5rem;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          flex-wrap: wrap;
-          gap: 2rem;
-          position: relative;
-          overflow: hidden;
+        @keyframes mq-scroll {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-100%); }
         }
 
-        @media (max-width: 1024px) {
-          .mq-header-grid { grid-template-columns: 1fr !important; gap: 2rem !important; margin-bottom: 3rem !important; }
-          .mq-rate-grid { grid-template-columns: 1fr !important; }
+        .mq-section-head {
+          background: #00308F; color: #fff;
+          padding: 8px 16px; font-size: 14px;
+          font-weight: bold; border-left: 6px solid #FF9933;
+          letter-spacing: 0.03em; text-transform: uppercase;
         }
+
+        .mq-notice {
+          background: #fffde7; border: 1px solid #f9a825;
+          border-left: 5px solid #f57f17;
+          padding: 9px 14px; font-size: 13px;
+          color: #333; margin-bottom: 12px;
+        }
+
+        .mq-layout {
+          display: grid;
+          grid-template-columns: 280px 1fr;
+          background: #fff;
+          border: 1px solid #aab;
+          border-top: none;
+        }
+
+        .mq-stat-row {
+          border-bottom: 1px solid #ccc;
+          padding: 12px 14px;
+          background: #fff;
+          transition: background 0.15s;
+        }
+        .mq-stat-row:nth-child(even) { background: #e8eef8; }
+        .mq-stat-row:hover { background: #d0daf0; }
+        .mq-stat-row:last-child { border-bottom: none; }
+
+        .mq-prog-track {
+          height: 8px; background: rgba(0,0,0,0.08);
+          border: 1px solid #ccc; overflow: hidden; margin-top: 6px;
+        }
+        .mq-prog-fill {
+          height: 100%;
+          transition: width 1.6s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        .mq-gov-btn {
+          display: inline-block; background: #138808; color: #fff;
+          border: 2px outset #1aaa0a; padding: 7px 20px;
+          font-size: 13px; font-weight: bold; text-decoration: none;
+          cursor: pointer; font-family: "Times New Roman", serif;
+          letter-spacing: 0.03em; transition: background 0.15s;
+        }
+        .mq-gov-btn:hover { background: #0d6e06; border-style: inset; }
+        .mq-gov-btn-red { background: #b71c1c; border-color: #8b0000; }
+        .mq-gov-btn-red:hover { background: #8b0000; }
+
+        .mq-stats-strip { display: flex; gap: 0; border: 1px solid #aab; overflow: hidden; }
+        .mq-stat-cell {
+          flex: 1; text-align: center; padding: 10px 6px;
+          border-right: 1px solid #aab; background: #fff;
+        }
+        .mq-stat-cell:last-child { border-right: none; }
+        .mq-stat-cell:nth-child(even) { background: #e8eef8; }
+
+        .mq-footer-strip {
+          background: #00308F; color: #fff; font-size: 12px;
+          padding: 10px 16px; display: flex;
+          justify-content: space-between; align-items: center;
+          border-top: 3px solid #FF9933; flex-wrap: wrap; gap: 8px;
+        }
+
+        .mq-table {
+          width: 100%; border-collapse: collapse; font-size: 13px; background: #fff;
+        }
+        .mq-table th {
+          background: #00308F; color: #FFD700;
+          padding: 7px 10px; text-align: left;
+          border: 1px solid #003580; font-size: 11px;
+          text-transform: uppercase; letter-spacing: 0.06em;
+        }
+        .mq-table td {
+          padding: 7px 10px; border: 1px solid #bbb;
+          vertical-align: top; color: #111; line-height: 1.5;
+        }
+        .mq-table tr:nth-child(even) td { background: #e8eef8; }
+        .mq-table tr:hover td { background: #d0daf0; }
 
         @media (max-width: 768px) {
-          .mq-card-inner {
-            grid-template-columns: auto 1fr !important;
-          }
-          .mq-card-num {
-            display: none !important;
-          }
-          .mq-cta-banner {
-            padding: 2rem 1.5rem !important;
-            flex-direction: column !important;
-            align-items: flex-start !important;
-          }
-          .mq-cta-btn {
-            width: 100% !important;
-            justify-content: center !important;
-          }
-        }
-
-        @media (max-width: 480px) {
-          section[data-section="mq"] {
-            padding: 4rem 0 !important;
-          }
+          .mq-layout { grid-template-columns: 1fr !important; }
+          .mq-left-col { border-right: none !important; border-bottom: 1px solid #ccc; }
         }
       `}</style>
 
-      {/* Large background number */}
-      <div style={{
-        position: 'absolute', top: '50%', right: '-1rem',
-        transform: 'translateY(-50%)',
-        fontFamily: "'Cormorant Garamond', Georgia, serif",
-        fontSize: 'clamp(10rem, 22vw, 22rem)',
-        fontWeight: 700, color: 'rgba(13,47,36,0.04)',
-        lineHeight: 1, pointerEvents: 'none', userSelect: 'none',
-        letterSpacing: '-0.04em',
-      }}>MQ</div>
+      {/* Tricolor top */}
+      <div className="mq-tricolor"><span /><span /><span /></div>
 
-      {/* Top gold border */}
-      <div style={{
-        position: 'absolute', top: 0, left: 0, right: 0,
-        height: 3,
-        background: 'linear-gradient(90deg, transparent, #ea6c1a 30%, #f5a54a 60%, transparent)',
-      }} />
+      {/* Marquee */}
+      <div className="mq-marquee-wrap">
+        <div className="mq-marquee-inner">
+          ★ प्रबंधन कोटा ★ सीमित प्लॉट उपलब्ध ★ धोलेरा SIR ★ गुजरात सरकार अनुमोदित ★ DMIC परियोजना ★ ₹7,200/वर्ग गज ★ अभी पंजीकरण करें ★&nbsp;&nbsp;&nbsp;★ प्रबंधन कोटा ★ सीमित प्लॉट उपलब्ध ★ धोलेरा SIR ★ गुजरात सरकार अनुमोदित ★ DMIC परियोजना ★ ₹7,200/वर्ग गज ★ अभी पंजीकरण करें ★
+        </div>
+      </div>
 
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 1.5rem', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '20px 16px 0' }}>
 
-        {/* Header */}
-        <div className="mq-header-grid">
-          <div>
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              background: 'rgba(13,47,36,0.07)',
-              border: '1px solid rgba(13,47,36,0.14)',
-              borderRadius: 999, padding: '0.3rem 1rem',
-              marginBottom: '1.2rem',
-            }}>
-              <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#ea6c1a', display: 'block' }} />
-              <span style={{
-                fontFamily: "'DM Sans', system-ui, sans-serif",
-                fontSize: '0.68rem', fontWeight: 700,
-                letterSpacing: '0.14em', textTransform: 'uppercase',
-                color: '#1a4a3a',
-              }}>प्रबंधन कोटा</span>
-            </div>
-
-            <h2 style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: 'clamp(2.2rem, 4vw, 3.6rem)',
-              fontWeight: 600, color: '#1a3a6b',
-              lineHeight: 1.05, margin: '0 0 1.4rem',
-            }}>
-              विशेष प्लॉट<br />
-              <span style={{ fontStyle: 'italic', color: '#ea6c1a' }}>प्राथमिक दर पर</span>
-            </h2>
-
-            <div style={{
-              width: 48, height: 2.5,
-              background: 'linear-gradient(90deg, #ea6c1a, #f5a54a)',
-              borderRadius: 2,
-            }} />
-          </div>
-
-          <div>
-            <p style={{
-              fontFamily: "'DM Sans', system-ui, sans-serif",
-              fontSize: '1rem', color: 'rgba(13,47,36,0.60)',
-              lineHeight: 1.9, margin: '0 0 1.2rem',
-            }}>
-              धोलेरा स्मार्ट सिटी में आवासीय प्लॉट का एक सीमित समूह, प्रबंधन कोटा के तहत प्राथमिक दर पर आरक्षित — केवल पहले आओ, पहले पाओ के आधार पर उपलब्ध।
-            </p>
-            <div style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-              background: 'rgba(201,144,26,0.10)',
-              border: '1px solid rgba(201,144,26,0.25)',
-              borderRadius: 6, padding: '0.5rem 1rem',
-            }}>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#ea6c1a" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-              </svg>
-              <span style={{
-                fontFamily: "'DM Sans', system-ui, sans-serif",
-                fontSize: '0.72rem', fontWeight: 700,
-                color: '#ea6c1a', letterSpacing: '0.06em',
-              }}>05 मार्च 2026 से प्रभावी · उपलब्धता के अधीन</span>
-            </div>
-          </div>
+        {/* Notice */}
+        <div className="mq-notice">
+          <strong>⚠ सूचना:</strong> प्रबंधन कोटा में केवल <strong>235 प्लॉट शेष</strong> हैं। दर <strong>₹7,200/वर्ग गज</strong>, 05 मार्च 2026 से प्रभावी। आवेदन शुल्क <strong>₹11,500</strong> (पूर्णतः वापसी योग्य)।
         </div>
 
-        {/* Rate comparison + Stats */}
-        <div className="mq-rate-grid">
-          {/* Left: Rate comparison card */}
-          <div style={{
-            background: '#1a3a6b',
-            borderRadius: 20,
-            overflow: 'hidden',
-            boxShadow: '0 8px 48px rgba(13,47,36,0.18)',
-          }}>
-            {/* Management rate */}
+        {/* Section heading */}
+        <div className="mq-section-head">
+          अनुभाग: प्रबंधन कोटा — विशेष प्लॉट प्राथमिक दर पर
+        </div>
+
+        {/* Two col layout */}
+        <div className="mq-layout">
+
+          {/* LEFT: Rate comparison */}
+          <div className="mq-left-col" style={{ borderRight: '1px solid #ccc' }}>
             <div style={{
-              padding: '2rem 2rem 1.6rem',
-              borderBottom: '1px solid rgba(255,255,255,0.07)',
-              position: 'relative',
+              background: '#00308F', color: '#FFD700',
+              padding: '5px 10px', fontSize: 11, fontWeight: 'bold',
+              textTransform: 'uppercase', letterSpacing: '0.06em',
             }}>
-              <div style={{
-                position: 'absolute', top: 0, left: 0, right: 0,
-                height: 2.5,
-                background: 'linear-gradient(90deg, #ea6c1a, #f5a54a)',
-              }} />
-              <div style={{
-                fontFamily: "'DM Sans', system-ui, sans-serif",
-                fontSize: '0.62rem', fontWeight: 800,
-                letterSpacing: '0.18em', textTransform: 'uppercase',
-                color: '#ea6c1a', marginBottom: '0.8rem',
-              }}>प्रबंधन कोटा दर</div>
-              <div style={{
-                fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: 'clamp(1.8rem, 3vw, 2.6rem)',
-                fontWeight: 700,
-                background: 'linear-gradient(135deg, #ffffff, #f5a54a)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                lineHeight: 1,
-                marginBottom: '0.3rem',
-              }}>₹7,200</div>
-              <div style={{
-                fontFamily: "'DM Sans', system-ui, sans-serif",
-                fontSize: '0.72rem', color: 'rgba(255,255,255,0.40)',
-                letterSpacing: '0.08em', textTransform: 'uppercase',
-              }}>प्रति वर्ग गज</div>
+              दर तुलना
+            </div>
+
+            {/* MQ Rate */}
+            <div style={{ padding: '16px 14px', borderBottom: '1px solid #ccc', background: '#fff' }}>
+              <div style={{ fontSize: 10, fontWeight: 'bold', color: '#FF9933', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>
+                ★ प्रबंधन कोटा दर
+              </div>
+              <div style={{ fontSize: 32, fontWeight: 'bold', color: '#b71c1c', lineHeight: 1 }}>₹7,200</div>
+              <div style={{ fontSize: 11, color: '#555', textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: 2 }}>प्रति वर्ग गज</div>
             </div>
 
             {/* General rate */}
-            <div style={{ padding: '1.4rem 2rem', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-              <div style={{
-                fontFamily: "'DM Sans', system-ui, sans-serif",
-                fontSize: '0.62rem', fontWeight: 700,
-                letterSpacing: '0.14em', textTransform: 'uppercase',
-                color: 'rgba(255,255,255,0.25)', marginBottom: '0.5rem',
-              }}>सामान्य कोटा दर</div>
-              <div style={{
-                fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: '1.6rem', fontWeight: 600,
-                color: 'rgba(255,255,255,0.20)',
-                textDecoration: 'line-through',
-                textDecorationColor: 'rgba(255,255,255,0.15)',
-              }}>₹7,500</div>
+            <div style={{ padding: '12px 14px', borderBottom: '1px solid #ccc', background: '#e8eef8' }}>
+              <div style={{ fontSize: 10, fontWeight: 'bold', color: '#888', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>
+                सामान्य कोटा दर
+              </div>
+              <div style={{ fontSize: 24, fontWeight: 'bold', color: '#aaa', lineHeight: 1, textDecoration: 'line-through' }}>₹7,500</div>
+              <div style={{ fontSize: 11, color: '#888', textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: 2 }}>प्रति वर्ग गज</div>
             </div>
 
-            {/* Savings callout */}
-            <div style={{
-              padding: '1.4rem 2rem',
-              background: 'rgba(201,144,26,0.10)',
-              display: 'flex', alignItems: 'center', gap: '0.8rem',
-            }}>
-              <div style={{
-                width: 36, height: 36, borderRadius: 10,
-                background: 'rgba(201,144,26,0.15)',
-                border: '1px solid rgba(201,144,26,0.3)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                flexShrink: 0,
-              }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f5a54a" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
-                </svg>
+            {/* Savings */}
+            <div style={{ padding: '12px 14px', borderBottom: '1px solid #ccc', background: '#fffde7', border: '1px solid #f9a825' }}>
+              <div style={{ fontSize: 10, fontWeight: 'bold', color: '#138808', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>
+                ✔ बचत
               </div>
-              <div>
-                <div style={{
-                  fontFamily: "'Cormorant Garamond', Georgia, serif",
-                  fontSize: '1.3rem', fontWeight: 700, color: '#f5a54a', lineHeight: 1,
-                }}>₹{savings}/वर्ग गज बचत</div>
-                <div style={{
-                  fontFamily: "'DM Sans', system-ui, sans-serif",
-                  fontSize: '0.65rem', color: 'rgba(255,255,255,0.35)',
-                  marginTop: '0.2rem', textTransform: 'uppercase', letterSpacing: '0.06em',
-                }}>सामान्य कोटा की तुलना में</div>
+              <div style={{ fontSize: 22, fontWeight: 'bold', color: '#138808', lineHeight: 1 }}>₹{savings}/वर्ग गज</div>
+              <div style={{ fontSize: 11, color: '#555', marginTop: 2 }}>सामान्य कोटा की तुलना में</div>
+            </div>
+
+            {/* Rate table */}
+            <div style={{ padding: '12px 14px' }}>
+              <div style={{ fontSize: 11, fontWeight: 'bold', color: '#00308F', textTransform: 'uppercase', letterSpacing: '0.06em', borderBottom: '2px solid #FF9933', paddingBottom: 4, marginBottom: 8 }}>
+                भुगतान योजना
               </div>
+              <table className="mq-table">
+                <thead>
+                  <tr><th>किस्त</th><th>प्रतिशत</th><th>समय</th></tr>
+                </thead>
+                <tbody>
+                  {[
+                    ['बुकिंग', '10%', 'तुरंत'],
+                    ['किस्त 1–6', '15% × 6', '180 दिन'],
+                    ['MQ बुकिंग', '10%', 'तुरंत'],
+                    ['MQ शेष', '90%', '30 दिन'],
+                  ].map(([a, b, c]) => (
+                    <tr key={a}>
+                      <td>{a}</td>
+                      <td style={{ fontWeight: 'bold', color: '#00308F' }}>{b}</td>
+                      <td style={{ color: '#555' }}>{c}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <a href="/register" className="mq-gov-btn" style={{ textAlign: 'center' }}>▶ अभी आवेदन करें</a>
+              <a href="/register" className="mq-gov-btn mq-gov-btn-red" style={{ textAlign: 'center' }}>☎ संपर्क करें</a>
             </div>
           </div>
 
-          {/* Right: Stats cards */}
-          <div className="quota-stats-grid">
-            {stats.map((item) => (
-              <div
-                key={item.label}
-                className="mq-card"
-                style={{
-                  background: '#ffffff',
-                  border: '1px solid rgba(13,47,36,0.08)',
-                  borderRadius: 16,
-                  padding: '1.6rem 2rem',
-                  boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
-                  transition: 'all 0.25s',
-                  cursor: 'default',
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = 'rgba(201,144,26,0.35)';
-                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(201,144,26,0.10)';
-                  e.currentTarget.style.transform = 'translateX(6px)';
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = 'rgba(13,47,36,0.08)';
-                  e.currentTarget.style.boxShadow = '0 1px 4px rgba(0,0,0,0.04)';
-                  e.currentTarget.style.transform = 'translateX(0)';
-                }}
-              >
-                <div className="mq-card-inner">
-                  {/* Icon */}
-                  <div style={{
-                    width: 48, height: 48, borderRadius: 13,
-                    background: `rgba(${item.color === '#b91c1c' ? '185,28,28' : item.color === '#15803d' ? '21,128,61' : '13,47,36'},0.07)`,
-                    border: `1px solid rgba(${item.color === '#b91c1c' ? '185,28,28' : item.color === '#15803d' ? '21,128,61' : '13,47,36'},0.12)`,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: item.color, flexShrink: 0,
-                  }}>
-                    {item.icon}
-                  </div>
+          {/* RIGHT: Stats rows */}
+          <div>
+            <div style={{
+              background: '#e8eef8', padding: '6px 12px',
+              fontSize: 11, fontWeight: 'bold', color: '#00308F',
+              textTransform: 'uppercase', letterSpacing: '0.06em',
+              borderBottom: '1px solid #aab',
+              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+            }}>
+              <span>► प्लॉट उपलब्धता विवरण</span>
+              <span style={{ color: '#888', fontWeight: 'normal' }}>05 मार्च 2026 से प्रभावी</span>
+            </div>
 
-                  {/* Text + progress */}
-                  <div>
-                    <div style={{
-                      fontFamily: "'DM Sans', system-ui, sans-serif",
-                      fontSize: '0.75rem', fontWeight: 700,
-                      letterSpacing: '0.08em', textTransform: 'uppercase',
-                      color: 'rgba(0,0,0,0.35)', marginBottom: '0.2rem',
-                    }}>{item.label}</div>
-                    <div style={{
-                      fontFamily: "'DM Sans', system-ui, sans-serif",
-                      fontSize: '0.78rem', color: 'rgba(0,0,0,0.45)',
-                      lineHeight: 1.6,
-                    }}>{item.desc}</div>
+            {stats.map((item, i) => (
+              <div className="mq-stat-row" key={item.label} style={{ background: i % 2 === 0 ? '#fff' : '#e8eef8' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+                  <span style={{ fontSize: 11, color: '#888', minWidth: 22, paddingTop: 2, fontWeight: 'bold' }}>
+                    {String(i + 1).padStart(2, '0')}.
+                  </span>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+                      <span style={{
+                        display: 'inline-block', fontSize: 10,
+                        padding: '1px 7px',
+                        border: `1px solid ${item.tagBorder}`,
+                        background: item.tagBg, color: item.tagText,
+                        fontWeight: 'bold', letterSpacing: '0.04em',
+                      }}>
+                        {item.tag}
+                      </span>
+                      <span style={{ fontSize: 13, fontWeight: 'bold', color: '#00308F' }}>{item.label}</span>
+                      <span style={{ marginLeft: 'auto', fontSize: 28, fontWeight: 'bold', color: '#b71c1c', lineHeight: 1, opacity: 0.7 }}>{item.num}</span>
+                    </div>
+                    <div style={{ fontSize: 12, color: '#555', lineHeight: 1.6 }}>{item.desc}</div>
                     {item.progress && (
-                      <div style={{ marginTop: '0.8rem' }}>
-                        <div style={{
-                          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                          marginBottom: '0.35rem',
-                        }}>
-                          <span style={{
-                            fontFamily: "'DM Sans', system-ui, sans-serif",
-                            fontSize: '0.62rem', fontWeight: 700,
-                            color: item.progressColor, textTransform: 'uppercase',
-                            letterSpacing: '0.08em',
-                          }}>{item.progressLabel}</span>
+                      <div style={{ marginTop: 8 }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 3 }}>
+                          <span style={{ fontSize: 10, fontWeight: 'bold', color: item.progressColor, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                            {item.progressLabel}
+                          </span>
+                          <span style={{ fontSize: 10, color: '#888' }}>{item.progress}%</span>
                         </div>
-                        <div style={{
-                          height: 5, background: 'rgba(0,0,0,0.07)',
-                          borderRadius: 99, overflow: 'hidden',
-                        }}>
-                          <div style={{
-                            height: '100%', borderRadius: 99,
-                            background: item.progressColor,
-                            width: animated ? `${item.progress}%` : '0%',
-                            transition: 'width 1.6s cubic-bezier(0.4,0,0.2,1)',
-                          }} />
+                        <div className="mq-prog-track">
+                          <div
+                            className="mq-prog-fill"
+                            style={{
+                              background: item.progressColor,
+                              width: animated ? `${item.progress}%` : '0%',
+                            }}
+                          />
                         </div>
                       </div>
                     )}
                   </div>
-
-                  {/* Big number */}
-                  <div className="mq-card-num" style={{
-                    fontFamily: "'Cormorant Garamond', Georgia, serif",
-                    fontSize: 'clamp(2.8rem,4vw,4rem)',
-                    fontWeight: 700, color: '#ea6c1a',
-                    lineHeight: 1, flexShrink: 0,
-                    opacity: 0.55,
-                  }}>{item.num}</div>
                 </div>
               </div>
             ))}
+
+            {/* Infobox */}
+            <div style={{ padding: '12px 14px', borderTop: '2px solid #00308F' }}>
+              <div style={{ fontSize: 11, fontWeight: 'bold', color: '#00308F', textTransform: 'uppercase', letterSpacing: '0.06em', borderBottom: '2px solid #FF9933', paddingBottom: 4, marginBottom: 8 }}>
+                ► आवेदन विवरण
+              </div>
+              {[
+                ['कोटा प्रकार', 'प्रबंधन कोटा'],
+                ['कुल प्लॉट', '646'],
+                ['आवंटित', '411'],
+                ['शेष उपलब्ध', '235'],
+                ['MQ दर', '₹7,200/वर्ग गज'],
+                ['आवेदन शुल्क', '₹11,500'],
+                ['वापसी', 'हाँ, पूर्णतः'],
+                ['प्रभावी तिथि', '05 मार्च 2026'],
+              ].map(([k, v]) => (
+                <div key={k} style={{ display: 'flex', justifyContent: 'space-between', padding: '5px 0', fontSize: 12, borderBottom: '1px dotted #ccc' }}>
+                  <span style={{ color: '#555' }}>{k}</span>
+                  <span style={{ fontWeight: 'bold', color: '#00308F' }}>{v}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* CTA Banner */}
-        <div className="mq-cta-banner">
-          <div style={{ position: 'relative', zIndex: 1 }}>
-            <p style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: 'clamp(1.3rem, 2.5vw, 1.9rem)',
-              fontStyle: 'italic', color: '#ffffff',
-              margin: '0 0 0.4rem', lineHeight: 1.3,
-            }}>प्रबंधन कोटा में केवल 235 प्लॉट शेष हैं।</p>
-            <p style={{
-              fontFamily: "'DM Sans', system-ui, sans-serif",
-              fontSize: '0.82rem', color: '#ffffff', margin: 0,
-            }}>
-              आवेदन शुल्क <strong style={{ color: '#f5a54a' }}>₹11,500</strong>
-              <span style={{ color: '#ffffff', marginLeft: '0.4rem' }}>*वापसी योग्य</span>
-            </p>
+        {/* Stats strip */}
+        <div className="mq-stats-strip" style={{ borderTop: '2px solid #00308F' }}>
+          {[
+            { val: '646', label: 'कुल प्लॉट' },
+            { val: '411', label: 'आवंटित' },
+            { val: '235', label: 'शेष' },
+            { val: '₹7,200', label: 'MQ दर' },
+            { val: '₹11,500', label: 'आवेदन शुल्क' },
+          ].map(s => (
+            <div className="mq-stat-cell" key={s.label}>
+              <div style={{ fontSize: 18, fontWeight: 'bold', color: '#b71c1c', lineHeight: 1 }}>{s.val}</div>
+              <div style={{ fontSize: 10, color: '#555', textTransform: 'uppercase', letterSpacing: '0.06em', marginTop: 2 }}>{s.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA strip */}
+        <div style={{ border: '2px solid #b71c1c', background: '#fff', marginTop: 16 }}>
+          <div style={{
+            background: '#b71c1c', color: '#fff', padding: '6px 14px',
+            fontSize: 13, fontWeight: 'bold', textTransform: 'uppercase',
+            letterSpacing: '0.06em', display: 'flex', alignItems: 'center', gap: 8,
+          }}>
+            <span style={{ fontSize: 16 }}>⚠</span>
+            अंतिम अवसर — प्रबंधन कोटा में केवल 235 प्लॉट शेष
           </div>
-          <a
-            href="/register"
-            className="mq-cta-btn"
-            style={{
-              position: 'relative', zIndex: 1,
-              display: 'inline-flex', alignItems: 'center', gap: '0.6rem',
-              background: '#ea6c1a', color: '#ffffff',
-              padding: '1rem 2.6rem', borderRadius: 6,
-              fontFamily: "'DM Sans', system-ui, sans-serif",
-              fontSize: '0.82rem', fontWeight: 800,
-              letterSpacing: '0.10em', textTransform: 'uppercase',
-              textDecoration: 'none', transition: 'all 0.3s',
-              whiteSpace: 'nowrap', flexShrink: 0,
-              boxShadow: '0 8px 32px rgba(201,144,26,0.30)',
-            }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#f07d2a'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-            onMouseLeave={e => { e.currentTarget.style.background = '#ea6c1a'; e.currentTarget.style.transform = 'translateY(0)'; }}
-          >
-            अभी पंजीकरण करें
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            padding: '14px 18px', flexWrap: 'wrap', gap: 12,
+          }}>
+            <div>
+              <p style={{ fontSize: 14, color: '#111', margin: '0 0 4px', fontWeight: 'bold' }}>
+                प्रबंधन कोटा में केवल <span style={{ color: '#b71c1c', fontSize: 18 }}>235</span> प्लॉट शेष हैं।
+              </p>
+              <p style={{ fontSize: 12, color: '#555', margin: 0 }}>
+                आवेदन शुल्क: <strong style={{ color: '#00308F' }}>₹11,500</strong>&nbsp;
+                <span style={{ color: '#138808' }}>★ पूर्णतः वापसी योग्य</span>
+              </p>
+            </div>
+            <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+              <a href="/register" className="mq-gov-btn">▶ अभी पंजीकरण करें</a>
+              <a href="/register" className="mq-gov-btn mq-gov-btn-red">☎ संपर्क करें</a>
+            </div>
+          </div>
         </div>
 
         {/* Fine print */}
-        <p style={{
-          fontFamily: "'DM Sans', system-ui, sans-serif",
-          fontSize: '0.68rem', color: 'rgba(13,47,36,0.30)',
-          textAlign: 'center', marginTop: '1.8rem', lineHeight: 1.7,
-        }}>
+        <p style={{ fontSize: 11, color: '#888', textAlign: 'center', marginTop: 10, lineHeight: 1.7 }}>
           *प्रबंधन कोटा मूल्य ₹7,200/वर्ग गज, 05 मार्च 2026 से प्रभावी। पंजीकरण के समय उपलब्धता के अधीन। रिफंड नीति लागू होती है।
         </p>
+
       </div>
+
+      {/* Footer strip */}
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 16px' }}>
+        <div className="mq-footer-strip">
+          <span>© धोलेरा SIR निवेश पोर्टल | प्रबंधन कोटा</span>
+          <span style={{ fontSize: 11, color: '#aac' }}>अंतिम अद्यतन: मार्च 2026 | संस्करण 2.1.4</span>
+        </div>
+      </div>
+
+      {/* Tricolor bottom */}
+      <div className="mq-tricolor"><span /><span /><span /></div>
+
     </section>
   );
 }

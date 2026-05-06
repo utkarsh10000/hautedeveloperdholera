@@ -10,7 +10,7 @@ export default function SchemeStrip() {
 
   useEffect(() => {
     setMounted(true);
-     const target = new Date('2026-05-19T24:00:00');
+     const target = new Date('2026-05-19T18:30:00Z');
 
     const interval = setInterval(() => {
       const now = new Date();
