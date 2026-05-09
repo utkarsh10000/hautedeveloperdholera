@@ -60,8 +60,8 @@ export default function Navbar() {
         .mobile-menu {
           display: none;
           flex-direction: column;
-          background: #0d2f24;
           border-top: 1px solid rgba(255,255,255,0.08);
+          transition: background 0.35s cubic-bezier(0.4,0,0.2,1);
         }
         .mobile-menu.open {
           display: flex;
@@ -163,8 +163,16 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile menu */}
-        <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+        {/* Mobile menu — background now matches navbar scroll state */}
+        <div
+          className={`mobile-menu ${menuOpen ? 'open' : ''}`}
+          style={{
+            background: scrolled ? 'rgba(255,255,255,0.98)' : 'rgba(26,58,107,0.95)',
+            borderTop: scrolled
+              ? '1px solid rgba(0,0,0,0.08)'
+              : '1px solid rgba(255,255,255,0.08)',
+          }}
+        >
           {navLinks.map(link => (
             <a
               key={link.href}
@@ -174,8 +182,10 @@ export default function Navbar() {
                 display: 'block', padding: '0.9rem 1.5rem',
                 fontFamily: "'DM Sans', system-ui, sans-serif",
                 fontSize: '0.9rem', fontWeight: 500,
-                color: 'rgba(255,255,255,0.85)',
-                borderBottom: '1px solid rgba(255,255,255,0.06)',
+                color: scrolled ? '#1c1c1c' : 'rgba(255,255,255,0.85)',
+                borderBottom: scrolled
+                  ? '1px solid rgba(0,0,0,0.06)'
+                  : '1px solid rgba(255,255,255,0.06)',
                 textDecoration: 'none',
               }}
             >
