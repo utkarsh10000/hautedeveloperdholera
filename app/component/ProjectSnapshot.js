@@ -230,7 +230,7 @@ export default function ProjectSnapshot() {
 
         {/* Govt logos strip */}
         <div className="ps-logos-strip">
-          <div className="ps-logos-label">★ गर्व से समर्थित — Proudly Supported By ★</div>
+          <div className="ps-logos-label">★ गर्व से समर्थन — Proudly Supporting ★</div>
           {logos.map(logo => (
             <div key={logo.alt} className="ps-logo-box">
               <img src={logo.src} alt={logo.alt} />
