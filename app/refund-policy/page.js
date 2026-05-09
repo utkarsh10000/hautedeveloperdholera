@@ -228,7 +228,7 @@ export default function RefundPolicyPage() {
               <div className="rp-amount-grid">
                 <div className="rp-amount-box rp-amount-box--green">
                   <div className="rp-amount-box__label">वापस की जाने वाली राशि</div>
-                  <div className="rp-amount-box__value">₹14,000</div>
+                  <div className="rp-amount-box__value">₹11,000</div>
                   <div className="rp-amount-box__note">रुपये चौदह हजार मात्र — आवेदक को वापस किए जाएंगे</div>
                 </div>
                 <div className="rp-amount-box rp-amount-box--red">

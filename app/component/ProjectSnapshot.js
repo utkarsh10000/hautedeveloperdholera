@@ -10,7 +10,7 @@ export default function ProjectSnapshot() {
     },
     {
       label: "प्लॉट आकार",
-      value: "121 वर्ग गज और उससे अधिक",
+      value: "200 वर्ग गज और उससे अधिक",
       sub: "अनेक विन्यास उपलब्ध",
       code: "P-02",
     },
@@ -100,13 +100,13 @@ export default function ProjectSnapshot() {
         .ps-logo-box {
           background: rgba(255,255,255,0.12);
           border: 1px solid rgba(255,255,255,0.2);
-          padding: 6px 10px;
+          padding: 10px 16px;
           display: flex;
           align-items: center;
           justify-content: center;
         }
         .ps-logo-box img {
-          height: 50px;
+          height: 90px;
           width: auto;
           object-fit: contain;
         }
@@ -129,26 +129,32 @@ export default function ProjectSnapshot() {
           background: #fff;
           border-right: 1px solid #bbb;
           border-bottom: 1px solid #bbb;
-          padding: 14px 12px;
+          padding: 20px 16px;
           transition: background 0.15s;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          min-height: 140px;
         }
         .ps-card:hover { background: #e8eef8; }
         .ps-card-code {
-          font-size: 9px; color: #FF9933; font-weight: bold;
+          font-size: 11px; color: #FF9933; font-weight: bold;
           letter-spacing: 0.08em; font-family: "Courier New", monospace;
           margin-bottom: 4px;
         }
         .ps-card-label {
-          font-size: 10px; font-weight: bold; color: #00308F;
+          font-size: 12px; font-weight: bold; color: #00308F;
           text-transform: uppercase; letter-spacing: 0.06em;
           margin-bottom: 4px;
         }
         .ps-card-value {
-          font-size: 14px; font-weight: bold; color: #111;
+          font-size: 18px; font-weight: bold; color: #111;
           line-height: 1.3; margin-bottom: 3px;
         }
         .ps-card-sub {
-          font-size: 11px; color: #666; line-height: 1.5;
+          font-size: 13px; color: #666; line-height: 1.5;
         }
 
         .ps-table {
@@ -196,7 +202,7 @@ export default function ProjectSnapshot() {
         }
         @media (max-width: 480px) {
           .ps-card-grid { grid-template-columns: 1fr !important; }
-          .ps-logo-box img { height: 36px !important; }
+          .ps-logo-box img { height: 60px !important; }
         }
       `}</style>
 
@@ -290,7 +296,7 @@ export default function ProjectSnapshot() {
         {/* Stats strip */}
         <div className="ps-stats-row" style={{ borderTop: "2px solid #00308F" }}>
           {[
-            { val: "121+", label: "न्यूनतम वर्ग गज" },
+            { val: "200+", label: "न्यूनतम वर्ग गज" },
             { val: "33%", label: "महिला कोटा" },
             { val: "235", label: "शेष प्लॉट" },
             { val: "₹7,500", label: "BSP दर" },
